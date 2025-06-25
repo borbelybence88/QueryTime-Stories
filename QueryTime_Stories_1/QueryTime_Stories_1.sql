@@ -25,7 +25,7 @@ date_table AS(
     SELECT EXPLODE(SEQUENCE(DATE'2025-01-01', DATE'2025-03-31', INTERVAL 1 DAY)) AS date
 ),
 
---joining the raw date with the date table to get campaing/user combinations on daily level
+--joining the raw data with the date table to get campaing/user combinations on daily level
 joined AS(
     SELECT
         date.date,
