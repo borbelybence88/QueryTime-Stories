@@ -1,0 +1,24 @@
+QueryTime Stories #1
+Once upon a time, there was a messy table with campaign details and overlapping periods.
+
+/*
+You're reading the very first episode of QueryTime Stories where I share interesting and/or useful solutions I’ve come across while working with data. Hope you enjoy it!
+*/
+
+I was working with a table containing campaign details, including "from" and "to" date fields — but the periods were overlapping, even though they shouldn't have been.
+Each user should have only one campaign per day, and it should be the one with the highest priority.
+
+At first, I came up with a solution that worked, but I wasn't satisfied with it.
+Then, I got a great hint from Gabor Tari: use a date table!
+So here's what I did:
+• Generated a date table.
+• Joined it with the original table, resulting in a daily-level table with all campaigns.
+• Used ROW_NUMBER() to select the highest priority campaign per day.
+• Calculated the MIN and MAX dates per campaign.
+
+The result: a table with the same structure — now without overlaps.
+
+You can see the detailed scripts in the shared images and in the QueryTime Stories repo (link in the comments).
+(I used Databricks for this demo — some functions may differ in other environments.)
+
+#QueryTimeStories #SQL
