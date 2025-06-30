@@ -1,0 +1,22 @@
+QueryTime Stories #2
+Once upon a time, there was a shiny gold table that every knight longed for it. But only the smartest ones knew which bronze and silver tables to refresh first to finally reach the golden one.
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I've come across while working with data. Hope you enjoy it!
+*/
+
+The goal was to get an ordered list of bronze and silver layer tables that needed to be refreshed in order to get an up-to-date gold table in the end.
+
+The table dependencies were stored in a classic parent-child hierarchy table, and that's where recursive queries came in handy.
+
+So here’s what I did:
+• Wrote a recursive query where the gold table(s) were in the anchor part with 1 as the level, representing the order of execution.
+• The recursive part gathered all the required tables, increasing the level number as it went. If a table was a source for multiple downstream tables, it appeared multiple times in the results with different levels.
+• Used the MAX(level) function to aggregate and determine the earliest point when each table needed to be refreshed.
+
+The result is a table listing all necessary tables with their execution order (higher levels go first). Tables with the same level can be refreshed in parallel.
+
+You can check the details in the shared images and in the QueryTime Stories repo (link in comments).
+(I used BigQuery for this demo — some functions may differ in other environments.)
+
+#QueryTimeStories #SQL #Recursive
