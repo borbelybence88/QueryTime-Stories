@@ -18,7 +18,7 @@ with_item_number AS(
   SELECT
   Store,
   Item,
-  ROW_NUMBER() OVER(PARTITION BY Store ORDER BY Item) AS Item_Number_Per_Store
+  ROW_NUMBER() OVER(PARTITION BY Store ORDER BY Item) AS Item_number_per_store
   FROM test_data
 )
 
@@ -29,4 +29,4 @@ SELECT
   2,
   3
 FROM with_item_number
-PIVOT (MAX(Item) FOR Item_Number_Per_Store IN (1, 2, 3 ))
+PIVOT (MAX(Item) FOR Item_number_per_store IN (1, 2, 3 ))
