@@ -1,0 +1,24 @@
+QueryTime Stories #4
+Once upon a time, there was a peaceful kingdom where everybody lived happily. But it wasn't always like this. Centuries ago, three brothers were fighting for the throne — until the youngest finally won and brought peace and wealth to the land.
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I've come across while working with data. Hope you enjoy it!
+*/
+
+During the time of war, the three princes kept replacing each other on the throne again and again.
+
+We wanted to see when each of them ruled during those war-torn decades. But our table only had two columns: year and name.
+
+If we used MIN() and MAX() on the years, grouped by name, we got incorrect results — the princes kept switching places, so their reigns overlapped. We needed an extra column to determine how many times each prince ruled.
+
+So here’s what I did:
+
+- I compared the current row’s king with the previous one, ordered by year. If there was a change, I marked it with a 1 in a change flag column.
+- Then I calculated a running total of the change flags to identify distinct reign periods.
+- With that, I could finally apply MIN() and MAX() to the years, grouping not just by name, but also by the reign/session column.
+
+You can check the details in the shared images and in the QueryTime Stories repo (link in comments).
+
+(I used Databricks for the SQL part of this demo — some functions may differ in other environments.)
+
+#QueryTimeStories #SQL 
