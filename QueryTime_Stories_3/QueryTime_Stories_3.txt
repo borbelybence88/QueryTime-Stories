@@ -1,0 +1,35 @@
+QueryTime Stories #3
+Once upon a time, a carpenter was preparing to build a new throne for the king. As he opened his toolbox, the hammer, the screwdriver, the saw, and all the others started arguing about who was the best.
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I've come across while working with data. Hope you enjoy it!
+*/
+
+So today’s story is about choosing the right tool for the job. Even the simplest task can be difficult if we’re not using the ideal tool.
+
+Let’s see a simple example with this carpenter’s shopping list.
+There’s a table with store and item columns. We want to pivot this to have one row per store and as many columns as items. So we need an extra column that tells us how many items we need per store.
+
+Here are a few solutions using different tools:
+• Excel: Order the table by store, and then use an IF formula that detects store changes
+• SQL: Use the ROW_NUMBER() window function
+• Power BI (Power Query): Use a custom M function to get a row-number-like result
+• Power BI (DAX): Create a calculated table
+• Python: Use pandas library functions
+•
+So many opportunities… but which one to choose?
+
+It depends on a lot of things:
+
+• How can the source data be accessed?
+• Is it a one-time task, or should it be included in a pipeline?
+• Where and how should the result be presented?
+• What are the work methods and frameworks used in the project?
+
+These are just a few questions — I’m sure you can think of more.
+Let me know in the comments: what are your considerations?
+
+You can check the details in the shared images and in the QueryTime Stories repo (link in comments).
+(I used Databricks for the SQL part of this demo — some functions may differ in other environments.)
+
+#QueryTimeStories #SQL #PowerBI #Excel #Python 
