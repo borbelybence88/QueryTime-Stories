@@ -1,0 +1,32 @@
+QueryTime Stories #5
+Once upon a time, something strange happened in the Kingdom of Permanency.
+The wind began to blow from the east instead of the west.
+The river started to flow uphill.
+An old monk ran shakily into the king's hall:
+— Your Highness! It has begun! The dimensions… they're starting to change. Slowly!
+The King called for the help of the wisest wizard, the strongest warrior, and the quickest rogue.
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I've come across while working with data. Hope you enjoy it!
+*/
+
+So we're dealing with slowly changing dimensions. In this (and in the next few) episodes, we will go through the types of them and how to handle them with SQL.
+
+Let's start with a simple one: a type of dimension that doesn't change — type 0.
+Our wizard is an elf, our warrior is a dwarf, and our rogue is human. That can't be changed. If the data from the source system tells us that our wizard is an orc, we should be suspicious — there might be some issue in the source.
+
+The next one is type 1.
+With this type, we simply overwrite the existing data without keeping historical records.
+Let’s say we don’t want to track the adventurer’s name history for some reason.
+So if our warrior, Thorgar Ironfist, decides to change his name to Dorg Stonebreaker, then we just replace his name in our table.
+
+But how can we achieve that with SQL?
+We could use an UPDATE statement, but for tasks related to SCDs, I prefer using the MERGE statement. It provides me flexibility in handling new and deleted rows or other SCD types.
+
+You can check the details in the shared images and in the QueryTime Stories repo (link in comments).
+
+(I used Databricks for the SQL part of this demo — some functions may differ in other environments.)
+
+We will continue with the other types of SCDs in the next chapters.
+
+#QueryTimeStories #SQL #SCD 
