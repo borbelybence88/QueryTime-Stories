@@ -1,0 +1,37 @@
+QueryTime Stories #6
+Once upon a time, there were three adventurers seeking the root of change in the Kingdom of Permanency.
+During their mission, they met an old gatekeeper who said:
+“Answer this riddle, or you shall not pass!”
+
+Got a new name? A fresh armor too?
+No worries—I’ll keep the old and new you.
+I don’t grow wide—I grow real tall,
+Stacking your changes, one row for all!
+Who am I?
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I’ve come across while working with data. Hope you enjoy it!
+*/
+
+Luckily, our team knew the answer: Slowly Changing Dimensions Type 2 (SCD Type 2).
+
+With this type, we preserve all historical data.
+Whenever a change happens in the source data for an entity, we insert a new row into the dimension table and either flag it as the current row or use effective_from and effective_to dates.
+
+Let’s say our wizard upgrades his mace to a better weapon.
+We want to insert a new row into the table with the new weapon, set today as the valid_from date, and use 9999-12-31 as the valid_to date.
+
+To achieve that, I usually use a staging table and two MERGE statements:
+
+- First, I create a staging table with the same structure as our dimension table, filled with the most recent data, plus two extra columns: staging_id and change_type.
+- The first MERGE statement updates the staging table to include only rows where changes occurred (e.g., in the weapon).
+- Then, I duplicate the modified rows in the staging table, but with character_id as the staging_id.
+- Finally, the second MERGE statement updates the valid_to date in the old rows and inserts new rows with the updated values.
+
+You can check out the details in the shared images and in the QueryTime Stories repo (link in the comments).
+
+(I used Databricks for this demo — some functions may differ in other environments.)
+
+We’ll continue exploring the other types of SCDs in the next chapters.
+
+#QueryTimeStories #SQL #SCD
