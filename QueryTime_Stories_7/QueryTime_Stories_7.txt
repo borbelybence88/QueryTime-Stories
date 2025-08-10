@@ -1,0 +1,29 @@
+QueryTime Stories #7
+Once upon a time, the three adventurers wanted to cross a river.
+The warrior tried to build a crude bridge from a fallen tree.
+The rogue searched for a narrow spot to leap across.
+The wizard tried to levitate over it.
+But all was in vain — with every attempt, the river grew wider and wider.
+
+/*
+You're reading the next episode of QueryTime Stories, where I share interesting and/or useful solutions I've come across while working with data. Hope you enjoy it!
+*/
+
+What they didn't know was that the river was enchanted with an SCD Type 3 spell.
+With this type of Slowly Changing Dimension, we store historical data in new columns. But since we usually don't want to deal with an ever-expanding table, we limit the amount of historical data we preserve.
+
+Let's use the same example from the previous episode:
+Our wizard changed his weapon.
+With SCD Type 3, we'd have current_weapon and previous_weapon columns, containing the new and the old weapon names, respectively.
+If he changes it again, the newest weapon goes into the current_weapon column, the second one into previous_weapon, and the original weapon is lost to history.
+So it's important to consider when and where this type of tracking is appropriate.
+
+To implement this, we can use a simple MERGE statement where — if a weapon has changed — we update previous_weapon with the current one, and current_weapon with the new weapon from the source.
+
+You can check the details in the shared images and in the QueryTime Stories repo (link in the comments).
+
+(I used Databricks for this demo — some functions may differ in other environments.)
+
+We'll continue with another type of SCD in the next chapter.
+
+#QueryTimeStories #SQL #SCD 
